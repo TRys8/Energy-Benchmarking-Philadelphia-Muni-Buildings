@@ -5,18 +5,19 @@ The goal of this project is to present this municipal building data and display 
 
 The information below is an email we received from the Department of Energy with some general details on the project:
 
-o Make municipal energy consumption data interesting for people to look at
+*Make municipal energy consumption data interesting for people to look at
 
-o We talked about simplifying the data for public use which falls under this goal
+*We talked about simplifying the data for public use which falls under this goal
 
-Â· Provide some sort of time element to the data so that people can easily see trends
+*Provide some sort of time element to the data so that people can easily see trends
 
-Â· Highlight energy-efficient buildings, maybe show a comparison between top performers and low performers
+*Highlight energy-efficient buildings, maybe show a comparison between top performers and low performers
 
-o This could be a place to mention energy efficiency projects, or other reasons why a building is a top performer
+*This could be a place to mention energy efficiency projects, or other reasons why a building is a top performer
 
-Hereâ€™s the data we have right now: Â· Currently public benchmarking data: https://www.opendataphilly.org/dataset/building-energy-benchmarking
+Here's the data we have right now: 
+*Currently public benchmarking data: https://www.opendataphilly.org/dataset/building-energy-benchmarking
 
-Â· Benchmarking data visualization tool: http://visualization.phillybuildingbenchmarking.com/#/map
+*Benchmarking data visualization tool: http://visualization.phillybuildingbenchmarking.com/#/map
 
-Our inventory of data that weâ€™re soliciting feedback on to see what else we should make public (feel free to add comments!): http://www.phila.gov/data/inventory/#inventory/?view_42_filters=[%7B%22field%22%3A%22field_216%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%2255cdf2756c2aa0dd678e61bd%22%7D]&view_42_page=1
+Our inventory of data that we're soliciting feedback on to see what else we should make public (feel free to add comments!): http://www.phila.gov/data/inventory/#inventory/?view_42_filters=[%7B%22field%22%3A%22field_216%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%2255cdf2756c2aa0dd678e61bd%22%7D]&view_42_page=1
