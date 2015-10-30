@@ -1,7 +1,12 @@
 library(stringr)
-#setwd("~/Dropbox/Energy-Benchmarking-Philadelphia-Muni-Buildings/data")
+library(tidyr)
+library(dplyr)
 
-energy_df <- read.csv("../2011-13 Philadelphia Municipal Building Energy Usage.csv", stringsAsFactors=F)
+setwd("~/Dropbox/Energy-Benchmarking-Philadelphia-Muni-Buildings/data")
+
+energy_df <- read.csv("../data/2011-13 Philadelphia Municipal Building Energy Usage.csv", stringsAsFactors=F)
+
+energy_df <- rename(energy_df, weui = Weather.Normalized.Source.EUI..kBtu.ft2.)
 
 loc_df <- energy_df[, c("Property.Id", "Property.Name", "Location")]
 
