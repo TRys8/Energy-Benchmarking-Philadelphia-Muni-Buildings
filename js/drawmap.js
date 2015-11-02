@@ -53,36 +53,70 @@ d3.select("#detail-g")
    .attr("font-weight", "100")
    .attr("font-family", "monospace")
    .attr("text-anchor", "middle")
-   .text("Hover over a building, yo");
+   .text("Click a building for details");
+
+  d3.select("#detail-g")
+    .append("g")
+    .attr("id", "#chart-space")
+    .attr("transform", "translate(50, 50)");
 
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
+        drawChart(incomingData);
     });
 
-var buildings = g.selectAll("circle") 
+function drawChart(incomingData){
+
+  var xScale_line = d3.scale.linear()
+                      .domain([2011, 2012, 2013])
+                      .range([100, 175, 250]);
+
+  var xAxis_line = d3.svg.axis()
+                     .scale(xScale_line)
+                     .orient("bottom")
+ 
+  var yScale_line = d3.scale.linear()
+                      .domain([85, 115])
+                      .range([150, 20]);
+
+
+
+  d3.select("#chart-space");
+
+};
 
 function drawPoints(incomingData){
 
-    g.selectAll("circle")
-     .data(incomingData)
-     .enter()
-     .append("circle")
-     .attr("r", 7)
-     .attr("stroke", "black")
-     .attr("transform", function(d){ 
-        return "translate(" + albersProjection([
-          d.lon,
-          d.lat
-          ]) + ")";
-      })
-     .attr("fill", function(d, i){ 
-        if( i == 1 ){ return "#F00"}
-        else { return "#999" }; 
-      })
-     .attr("fill-opacity", .5)
-     .on("click", function(d){
-        d3.select("#building-name")
-          .text(d.property_name);
-     });
-   };
+  var colorScale_percent = d3.scale.linear()
+                         .domain([-32, 0, 27])
+                         .range(["green", "whitesmoke", "purple"]);
+
+  g.selectAll("circle")
+   .data(incomingData)
+   .enter()
+   .append("circle")
+   .attr("r", 7)
+   .attr("stroke", "black")
+   .attr("transform", function(d){ 
+      return "translate(" + albersProjection([
+        d.lon,
+        d.lat
+        ]) + ")";
+    })
+   .attr("fill", function(d){
+      return colorScale_percent(d.perc_1213);
+   })
+   .attr("fill-opacity", 1)
+   .on("click", function(d){
+      d3.select("#building-name")
+        .text(d.property_name);
+
+      d3.selectAll("circle")
+        .attr("stroke-width", "1");
+
+      d3.select(this)
+        .attr("stroke-width", "3");
+
+   });
+ };
 
