@@ -3,6 +3,7 @@ var width = 600,
 
 var svg = d3.select("#map-container")
   .append("svg")
+  .attr("id", "city-limits")
   .attr("width", width)
   .attr("height", height)
   .attr("fill", "white")
@@ -10,14 +11,23 @@ var svg = d3.select("#map-container")
 
 var g = svg.append("g");
 
-var albersProjection = d3.geo.albers()
+var projection = d3.geo.albers()
   .scale(95000)
   .rotate([75.05,0])
   .center([0, 39.93])
   .translate([width/2,height/2]);
 
 var geoPath = d3.geo.path()
-    .projection(albersProjection);
+    .projection(projection);
+
+var mapZoom = d3.behavior.zoom()
+                .translate(projection.translate())
+                .scale(projection.scale())
+                // .rotate(projection.rotate())
+                // .center(projection.center())
+                .on("zoom", zoomed);
+
+d3.select("#city-limits").call(mapZoom);
 
 g.selectAll("path")
   .data(city_limits_json.features)
@@ -53,6 +63,8 @@ d3.select("#detail-g")
    .attr("font-family", "monospace")
    .attr("text-anchor", "middle")
    .text("Click a building for details");
+
+
 
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
@@ -162,10 +174,11 @@ function drawPoints(incomingData){
    .data(incomingData)
    .enter()
    .append("circle")
+   .attr("class", "building")
    .attr("r", 7)
    .attr("stroke", "black")
    .attr("transform", function(d){ 
-      return "translate(" + albersProjection([
+      return "translate(" + projection([
         d.lon,
         d.lat
         ]) + ")";
@@ -189,3 +202,19 @@ function drawPoints(incomingData){
    });
  };
 
+function zoomed() {
+ 
+  projection.translate(mapZoom.translate())
+            .scale(mapZoom.scale());
+
+  d3.selectAll("path")
+    .attr("d", geoPath);
+
+  d3.selectAll("circle.building")
+    .attr("transform", function(d){ 
+      return "translate(" + projection([
+        d.lon,
+        d.lat
+        ]) + ")";
+    });
+};
