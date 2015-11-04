@@ -71,7 +71,7 @@ d3.select("#chart-data")
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
         drawChart(incomingData, property_id = 3192582);
-        updateText(incomingData, property_id);
+        // updateText(incomingData, property_id);
     });
 
 function drawChart(incomingData, property_id){
@@ -192,6 +192,21 @@ function drawPoints(incomingData){
    .on("click", function(d){
       d3.select("#building-name")
         .text(d.property_name);
+
+      d3.select("#building-address")
+        .text(d.address);
+
+      d3.select("#energy-use-2012-text")
+        .text("2012 energy use: " + Number(d.weui2012).toFixed(1) + " kBtu/sqft");
+
+      d3.select("#energy-use-2013-text")
+        .text("2013 energy use: " + Number(d.weui2013).toFixed(1) + " kBtu/sqft");
+
+      d3.select("#raw-change-text")
+        .text("Total change: " + Number(d.raw_1213).toFixed(1) + " kBtu/sqft");
+
+      d3.select("#percent-change-text")
+        .text("Percent change: " + Number(d.perc_1213).toFixed(1) + "%");
 
       d3.selectAll("circle")
         .attr("stroke-width", "1");
