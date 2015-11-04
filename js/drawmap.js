@@ -1,70 +1,72 @@
-var width = 600,
-    height = 500;
+var mapWidth = 400,
+    mapHeight = 400;
 
 var svg = d3.select("#map-container")
   .append("svg")
   .attr("id", "city-limits")
-  .attr("width", width)
-  .attr("height", height)
-  .attr("fill", "white")
-  .attr("stroke", "black");
+  .attr("width", mapWidth)
+  .attr("height", mapHeight)
+  .attr("fill", "white");
 
-var g = svg.append("g");
+var mapG = svg.append("g")
+              .attr("id", "map-g");
 
 var projection = d3.geo.albers()
-  .scale(95000)
-  .rotate([75.05,0])
-  .center([0, 39.93])
-  .translate([width/2,height/2]);
+  .scale(88000)
+  .rotate([75.12,0])
+  .center([0, 40.0])
+  .translate([mapWidth/2, mapHeight/2]);
 
 var geoPath = d3.geo.path()
-    .projection(projection);
+                .projection(projection);
 
 var mapZoom = d3.behavior.zoom()
                 .translate(projection.translate())
                 .scale(projection.scale())
-                // .rotate(projection.rotate())
-                // .center(projection.center())
                 .on("zoom", zoomed);
 
 d3.select("#city-limits").call(mapZoom);
 
-g.selectAll("path")
-  .data(city_limits_json.features)
-  .enter()
-  .append("path")
-  .attr("stroke", "black")
-  .attr("fill", "whitesmoke")
-  .attr("d", geoPath);
+mapG.selectAll("path")
+    .data(city_limits_json.features)
+    .enter()
+    .append("path")
+    .attr("stroke", "black")
+    .attr("fill", "whitesmoke")
+    .attr("d", geoPath);
 
-g.append("g")
-   .attr("id", "detail-g")
-   .attr("transform", "translate(250, 150)");
+d3.select("#chart-data")
+     .append("svg")
+     .attr("id", "building-chart")
+     .attr("width", 390)
+     .attr("height", 200) 
+     .attr("fill", "white")
+     .attr("stroke", "black")
+     .append("g")
+     .attr("id", "chart-g");
 
-d3.select("#detail-g") 
-   .append("rect")
-   .attr("id", "detail-box")
-   .attr("x", "0")
-   .attr("y", "0")
-   .attr("width", "350")
-   .attr("height", "350")
-   .attr("stroke", "whitesmoke")
-   .attr("stroke-opacity", "0.8")
-   .attr("fill", "none");
+// d3.select("#chart-g") 
+//    .append("rect")
+//    .attr("id", "detail-box")
+//    .attr("x", "0")
+//    .attr("y", "0")
+//    .attr("width", "350")
+//    .attr("height", "350")
+//    .attr("stroke", "whitesmoke")
+//    .attr("stroke-opacity", "0.8")
+//    .attr("fill", "none");
 
-  d3.select("#detail-g")
-   .append("text")
-   .attr("id", "building-name")
-   .attr("x", "175")
-   .attr("y", "20")
-   .attr("fill", "black")
-   .attr("font-size", "12px")
-   .attr("font-weight", "100")
-   .attr("font-family", "monospace")
-   .attr("text-anchor", "middle")
-   .text("Click a building for details");
-
-
+// d3.select("#chart-g")
+//    .append("text")
+//    .attr("id", "building-name")
+//    .attr("x", "175")
+//    .attr("y", "20")
+//    .attr("fill", "black")
+//    .attr("font-size", "12px")
+//    .attr("font-weight", "100")
+//    .attr("font-family", "monospace")
+//    .attr("text-anchor", "middle")
+//    .text("Click a building for details");
 
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
@@ -73,11 +75,10 @@ d3.csv("../data/muni_energy.csv", function(incomingData){
 
 function drawChart(incomingData, property_id){
 
-
-  var chartSpace = d3.select("#detail-g")
+  var chartSpace = d3.select("#chart-g")
     .append("g")
     .attr("id", "chart-space")
-    .attr("transform", "translate(40, 70)");
+    .attr("transform", "translate(50, -30)");
 
   var focus_building = incomingData.filter(function(obj){
       return obj["property_id"] == property_id;
@@ -93,7 +94,7 @@ function drawChart(incomingData, property_id){
 
   var xScale_line = d3.scale.linear()
                       .domain([0, 1, 2])
-                      .range([40, 140, 240]);
+                      .range([40, 150, 260]);
 
   var xAxis_line = d3.svg.axis()
                      .scale(xScale_line)
@@ -106,7 +107,7 @@ function drawChart(incomingData, property_id){
  
   var yScale_line = d3.scale.linear()
                       .domain([yScale_min, yScale_max])
-                      .range([180, 70]);
+                      .range([180, 50]);
 
   var yAxis_line = d3.svg.axis()
                      .scale(yScale_line)
@@ -170,7 +171,7 @@ function drawPoints(incomingData){
                          .domain([-32, 0, 27])
                          .range(["green", "whitesmoke", "purple"]);
 
-  g.selectAll("circle")
+  mapG.selectAll("circle")
    .data(incomingData)
    .enter()
    .append("circle")

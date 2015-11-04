@@ -1,6 +1,36 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
 #map-container {
-	max-width: 600px;
+	width: 400px;
 	margin: 0 auto;
+	float: left;
+}
+
+#details-container {
+	width: 400px;
+	height: 400px;
+	float: left;
+	text-align: center;
+}
+
+#text-data {
+	height: 150px;
+	margin: 0 auto;
+}
+
+#chart-data {
+	height: 250px;
+	margin: 0 auto;
+}
+
+#buidling-chart {
+	margin: 0 auto;
+}
+
+#map-container, #details-container, #text-data, #chart-data {
 	border: 1px solid black;
 }
 
@@ -13,7 +43,7 @@ circle.datapoint {
 text.datapoint, #y-axis-label {
 	font-family: Lato, Helvetica, Ariel, sans-serif;
 	font-weight: 300;
-	fill: black;
+	/*fill: black;*/
 	font-size: 12px;
 	text-anchor: middle;
 }
