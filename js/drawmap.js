@@ -71,6 +71,7 @@ d3.select("#chart-data")
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
         drawChart(incomingData, property_id = 3192582);
+        updateText(incomingData, property_id);
     });
 
 function drawChart(incomingData, property_id){

@@ -17,7 +17,7 @@ names(weui_df_wide) <- c("Property.Id", paste0("weui", 2011:2013))
 weui_df_wide$perc_1213 <- ((weui_df_wide$weui2013 - weui_df_wide$weui2012) / weui_df_wide$weui2012) * 100
 weui_df_wide$raw_1213 <- weui_df_wide$weui2013 - weui_df_wide$weui2012
 
-loc_df <- energy_df[, c("Property.Id", "Property.Name", "Location")]
+loc_df <- energy_df[, c("Property.Id", "Property.Name", "Address.1", "Location")]
 
 loc_df <- loc_df[!duplicated(loc_df$Property.Id),]
 
@@ -38,6 +38,6 @@ loc_df$coords <- NULL
 
 muni_energy_df <- merge(loc_df, weui_df_wide, by="Property.Id")
 
-names(muni_energy_df) <- c("property_id", "property_name", "lat", "lon", "weui2011", "weui2012", "weui2013", "perc_1213", "raw_1213")
+names(muni_energy_df) <- c("property_id", "property_name", "address", "lat", "lon", "weui2011", "weui2012", "weui2013", "perc_1213", "raw_1213")
 
 write.table(muni_energy_df, "muni_energy.csv", sep=",", row.names=F)
