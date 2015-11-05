@@ -45,32 +45,9 @@ d3.select("#chart-data")
      .append("g")
      .attr("id", "chart-g");
 
-// d3.select("#chart-g") 
-//    .append("rect")
-//    .attr("id", "detail-box")
-//    .attr("x", "0")
-//    .attr("y", "0")
-//    .attr("width", "350")
-//    .attr("height", "350")
-//    .attr("stroke", "whitesmoke")
-//    .attr("stroke-opacity", "0.8")
-//    .attr("fill", "none");
-
-// d3.select("#chart-g")
-//    .append("text")
-//    .attr("id", "building-name")
-//    .attr("x", "175")
-//    .attr("y", "20")
-//    .attr("fill", "black")
-//    .attr("font-size", "12px")
-//    .attr("font-weight", "100")
-//    .attr("font-family", "monospace")
-//    .attr("text-anchor", "middle")
-//    .text("Click a building for details");
-
 d3.csv("../data/muni_energy.csv", function(incomingData){
         drawPoints(incomingData);
-        drawChart(incomingData, property_id = 3192582);
+        drawChart(incomingData, property_id);
         // updateText(incomingData, property_id);
     });
 
@@ -79,7 +56,7 @@ function drawChart(incomingData, property_id){
   var chartSpace = d3.select("#chart-g")
     .append("g")
     .attr("id", "chart-space")
-    .attr("transform", "translate(50, -30)");
+    .attr("transform", "translate(50, -10)");
 
   var focus_building = incomingData.filter(function(obj){
       return obj["property_id"] == property_id;
@@ -130,7 +107,7 @@ function drawChart(incomingData, property_id){
     .attr("x", "-100")
     .attr("y", "10")
     .attr("transform", "rotate(270)")
-    .text("yearly energy use")
+    .text("kBtu/sq. ft.")
     .append("title")
     .text("Yearly energy use is measured in Weather Normalized Source Energy Use Intensity (kBtu per square foot)");
 
