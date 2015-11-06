@@ -1,0 +1,100 @@
+body {
+	margin: 0 auto;
+	padding: 20px;
+	font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#map-container {
+	width: 400px;
+	margin: 0 auto;
+	float: left;
+	border-right: 1px solid lightgrey;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+}
+
+#details-container {
+	width: 400px;
+	height: 403px;
+	float: left;
+	text-align: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+
+#text-data {
+	height: 150px;
+	margin: 0 auto;
+	font-weight: 400;
+}
+
+#text-data h3, #chart-data h3 {
+	margin: 0 auto 0 auto;
+	font-weight: 400;
+}
+
+.energy-data {
+	margin: 3px 0px 0px 80px;
+	padding: 0;
+	width: 250px;
+	text-align: left;
+}
+
+p#building-name {
+	margin: 0 auto;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+p#building-address {
+	margin: 0px auto 3px auto;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+#chart-data {
+	height: 250px;
+	margin: 0 auto;
+}
+
+#buidling-chart {
+	margin: 0 auto;
+}
+
+circle.datapoint {
+	stroke-width: 1;
+	stroke: dodgerblue;
+	fill: dodgerblue;
+}
+
+text.datapoint, #y-axis-label {
+	font-family: Lato, Helvetica, Ariel, sans-serif;
+	font-weight: 300;
+	/*fill: black;*/
+	font-size: 12px;
+	text-anchor: middle;
+}
+
+#detail-g > text {
+	font-family: Lato, Helvetica, Ariel, sans-serif;
+	font-weight: 300;
+	fill: black;
+	font-size: 16px;
+	text-anchor: middle;
+}
+
+#xAxisG text {
+	font-family: Lato, Helvetica, Ariel, sans-serif;
+	font-weight: 300;
+	fill: black;
+	font-size: 16px;
+	text-anchor: middle;
+}
+
+#xAxisG path {
+	fill: none;
+	stroke: none;
+}
+
